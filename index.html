@@ -4,8 +4,6 @@
 	<head>
 		<title> Registration form</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<!--<script type="text/javascript" src="js/jqvalidate.js"></script>-->
-		<script type="text/javascript" src="js/validate.js"></script>
 	</head>
 	
 	<body style="background-color:lightblue">
@@ -14,9 +12,9 @@
 			<h1 class="navbar-text ">Employee Registration Form</h1>
 			</nav>
 		</div>
-		<form class="form-horizontal container" action="#" name="EmployeeRegistration" onsubmit="return(ValidateForm(event));">
+		<form class="form-horizontal container" action="#" name="EmployeeRegistration" id="form_error">
 			<div class="form-group">
-				<label class="control-label col-sm-2" >Employee Name*</label>
+				<label class="control-label col-sm-2">Employee Name*</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="Empname" id="empname"><p id="name_error"></p>
 				</div>
@@ -24,7 +22,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2">Employee ID*</label>
 				<div class="col-sm-10"> 
-					<input type="text" class="form-control" name="Empid" id="empid">
+					<input type="text" class="form-control" name="Empid" id="empid"><p id="id_error"></p>
 				</div>
 			</div>
 			<div class="form-group">
@@ -63,6 +61,7 @@
 					<option value="Patna"> PUNE </option>
 					<option value="HYDRABAD"> HYDRABAD </option>
 					</select>
+					<p id="district_error"></p>
 				</div>
 			</div>
 			<div class="form-group">
@@ -75,19 +74,22 @@
 					<option value="Goa"> GOA </option>
 					<option value="Bihar"> BIHAR </option>
 					</select>
+					<p id="state_error"></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">PinCode*:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="Pincode" id="pincode">
+					<input type="number" class="form-control" name="Pincode" id="pincode">
+					<p id="pincode_error"></p>
 				</div>
 			</div>	
 			<div class="form-group">
 				<label class="control-label col-sm-2">Sex*</label>
 				<div class="col-sm-10">
-					<input type="radio" class="radio-inline" name="sex" id="sex" value="male"> Male
+					<input type="radio" class="radio-inline" name="sex" id="sex" value="male" required> Male
 					<input type="radio" class="radio-inline" name="sex"  value="Female"> Female
+					<p id="gender_error"></p>
 				</div>
 			</div>
 			<div class="form-group">
@@ -100,24 +102,27 @@
 					<option value="MBA"> MBA </option>
 					<option value="BCA"> BCA </option>
 					</select>
+					<p id="qualification_error"></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">EmailId*</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="emailid" id="emailid">
+					<input type="email" class="form-control" name="emailid" id="emailid">
+					<p id="emailid_error"></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">Date Of Birth</label>
 				<div class="col-sm-10">
-					<input type="datetime" class="form-control" name="dob" id="dob">
+					<input type="date" class="form-control" name="dob" id="dob">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2">Mobile Number*:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="mobileno" id="mobileno">
+					<input type="number" class="form-control" name="mobileno" id="mobileno">
+					<p id="mobileno_error"></p>
 				</div>
 			</div>			
 			<div class="form-group">
@@ -131,6 +136,7 @@
 					<option value="Sales"> Sales </option>
 					<option value="Production"> Production </option>
 					</select>
+					<p id="department_error"></p>
 				</div>
 			</div>
 			<div class="form-group">
@@ -141,12 +147,13 @@
 					<option value="Tranee">Tranee</option>
 					<option value="Manger">Manger</option>
 					</select>
+					<p id="position_error"></p>
 				</div>
 			</div>	
 			<br><br>
 			<div class="container">
 			<input type="reset" class="btn btn-danger control-label col-sm">
-			<input type="submit" value="Submit Form" class="btn btn-primary control-label col-sm">
+			<input type="submit" value="Submit Form" id="submit" class="btn btn-primary control-label col-sm">
 			<!-- <input type="button" value="Generate table" onclick="GenerateTable()">  -->
 			</div>
 			</center>
@@ -172,8 +179,14 @@
 					<th> Position </th>
 					<th> &nbsp </th>
 				</tr>
-			</table></div>
+				<tbody id="tdata">
+				</tbody>
+			</table ></div>
 		<hr>
 		<marquee> Thanku for filling registration form </marquee>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jqvalidate.js"></script>
+	
+	<!-- <script type="text/javascript" src="js/validate.js"></script> -->
 	</body>
 </html>
