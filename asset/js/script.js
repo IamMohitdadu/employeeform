@@ -1,8 +1,15 @@
+/*
+  file-name: script.js
+  used-for: Employee form creation Assignment for mindfire training session.
+  created-by: Mohit Dadu
+  description: the following file is for validating and generating table using jquery.
+*/
+
 $(function(){
     
     // function for validation
     function validate(){
-	    $("#name_error").hide();
+	    $("#name-error").hide();
 	    $("#id_error").hide();
 	    $("#district_error").hide();
 	    $("#state_error").hide();
@@ -255,3 +262,4 @@ $(function(){
         }
     });
 });
+
