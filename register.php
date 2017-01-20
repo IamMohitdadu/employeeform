@@ -1,5 +1,5 @@
 <!--
-  file-name: form.php
+  file-name: register.php
   used-for: form for registration of user and admin.
   created-by: Mohit Dadu
   description: it is the php file which redirect the user to the user login or admin login page.
@@ -20,9 +20,9 @@
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="form.php"><span class="glyphicon glyphicon-home"></span>&nbsp HOME</a></li>
-							<li><a href="register.php" class="active" style="color: green">Registration </a></li>
-							<li><a href="login.php" >Login</a></li>
+							<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp HOME</a></li>
+							<li><a href="register.php" style="color: green"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Registration </a></li>
+							<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
 						</ul>
 					</div>
 				</div>
@@ -31,26 +31,29 @@
 		<form action="mydb.php" class="form-horizontal container" name="LoginForm" method="post" id="form">
 			<div class="container-fluid form-group">
 				<div class="col-sm-10">
-					<label class="control-label col-sm-4">User name:</label>
+					<label class="control-label col-sm-4">Name:</label>
 					<div class="col-sm-6">
-						<input type="text" id="user-name" name="username" class="form-control" placeholder="Email address"/>
+						<input type="text" id="name" name="name" class="form-control" placeholder="Your Name"/>
 						<!-- <p id="usr">Enter valid email address</p> -->
 					</div>
-					<br>
+					<label class="control-label col-sm-4">User name:</label>
+					<div class="col-sm-6">
+						<input type="text" id="email" name="email" class="form-control" placeholder="Email address"/>
+						<!-- <p id="usr">Enter valid email address</p> -->
+					</div>
 					<label class="control-label col-sm-4">Password:</label>
 					<div class="col-sm-6">
-						<input type="text" id="password" name="password" class="form-control" placeholder="Must be more than 6 characters"/>
+						<input type="password" id="password" name="password" class="form-control" placeholder="Must be more than 6 characters"/>
 						<!-- <p id="psd">Should be 6-character</p> -->
 					</div>
-					<!--
 					<label class="control-label col-sm-4">Confirm Password:</label>
 					<div class="col-sm-6">
-						<input type="text" id="cnf-password" name="password" class="form-control" placeholder="Must be more than 6 characters"/>
-						<p id="cnf-psd">Should be same as Password</p> -->
+						<input type="password" id="cnf-password" name="cnf-password" class="form-control" placeholder="Must be more than 6 characters"/>
+						<!-- <p id="cnf-psd">Should be same as Password</p> -->
 					</div>
-					<label class="control-label col-sm-4">Login As:</label>
+					<label class="control-label col-sm-4">Register As:</label>
 					<div class = "col-sm-6">
-						<select id="select-user" class="from-control" name="logger">
+						<select id="select-user" class="from-control" name="userType">
 							<option value="Admin">Admin</option>
 							<option value="User">User</option>
 							<!-- <p id="lgr">Select User Type</p> -->
@@ -59,10 +62,7 @@
 				</div>
 			</div>
 			<div class="form-style">
-				<a href=""><center>forget password</center></a>
-			</div>
-			<div class="form-style">
-				<center><input type='submit' name='btn-signup' value='Sign Up'></center>
+				<center><input type='submit' class="btn btn-success" name='btn-signup' value='Sign Up'></center>
 			</div>      
     </form>
 		<!-- <script type="text/javascript" src="asset/js.script.js"></script> -->

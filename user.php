@@ -1,5 +1,5 @@
 <!--
-  file-name: add.php
+  file-name: user.php
   used-for: form for login as user
   created-by: Mohit Dadu
   description: it shows the option for adding new user or admin.
@@ -22,8 +22,8 @@
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="my-navbar">
               <ul class="nav navbar-nav">
-                <li><a href="add_user.php"><strong>ADD USER</strong></a></li>
-                <li><a href="add_admin.php"><strong>ADD ADMIN</strong></a></li>
+                <li><a href="add_user_details.php"><strong>ADD DETAILS</strong></a></li>
+                <li><a href="show_user_details.php"><strong>SHOWS DETAILS</strong></a></li>
               </ul>
             </div>
           </div>

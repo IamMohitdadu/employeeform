@@ -1,5 +1,5 @@
 <!--
-  file-name: form.php
+  file-name: index.php
   used-for: form for user and admin login
   created-by: Mohit Dadu
   description: it is the php file which redirect the user to the user login or admin login page.
@@ -20,9 +20,9 @@
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="form.php"><span class="glyphicon glyphicon-home"></span>&nbsp HOME</a></li>
-							<li><a href="register.php">Registration </a></li>
-							<li><a href="login.php">Login</a></li>
+							<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp HOME</a></li>
+							<li><a href="register.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp; Registration </a></li>
+							<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
 						</ul>
 					</div>
 				</div>
