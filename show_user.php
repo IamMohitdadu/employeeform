@@ -6,6 +6,12 @@
   date:18/01/2017
 -->
 
+<?php
+		session_start();
+		if(isset($_SESSION['name'])){
+				$name = $_SESSION['name'];
+		}
+?>
 
 <!DOCTYPE html>
 
@@ -53,13 +59,16 @@
         <div class="row">
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="my-navbar">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav col-lg-9">
                 <li><a href="add_user.php"><strong>ADD USER</strong></a></li>
                 <li><a href="add_admin.php"><strong>ADD ADMIN</strong></a></li>
-								        <li><a href="show_user.php"><strong>SHOW USERS</strong></a></li>
+								<li><a href="show_user.php"><strong>SHOW USERS</strong></a></li>
                 <li><a href="show_admin.php"><strong>SHOW ADMINS</strong></a></li>
               </ul>
-							<ul class="nav navbar-nav navbar-right">
+							<ul class="nav navbar-nav col-lg-1">
+								<li><span style="font-style: italic; font-size: 20px;color: white;">hi <?php echo $name; ?></span></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right col-lg-2">
 								<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp; LOGOUT</a></li>
 							</ul>
 					  </div>
@@ -67,6 +76,7 @@
         </div>
       </nav>
     </div>
+		<form action="" method="post">
     <div class="panel panel-default">
 			<div class="panel-heading">User's Details</div>
 			<div class="panel-body"></div>
@@ -76,6 +86,7 @@
 					<th>NAME</th>
 					<th>EMAIL</th>
 					<th>PASSWORD</th>
+					<th></th>
 				</tr>
    
 <?php
@@ -84,19 +95,23 @@
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-          echo "<tr>";
-          echo "<td>" . $row["Id"]. "</td>";
-          echo "<td>" . $row["Name"]. "</td>";
-          echo "<td>" . $row["Email"] . "</td>";
-					echo "<td>" . $row["Password"] . "</td>";
-          echo "</tr>";
-        }  // end while loop
+?>
+          <tr>
+          <td><?php echo $row["Id"]; ?></td>";
+          <td><?php echo $row["Name"]; ?></td>";
+          <td><?php echo $row["Email"]; ?></td>";
+					<td><?php echo $row["Password"]; ?></td>";
+					<td><a href="delete_user.php?id=<?php echo $row['Id']; ?>">Delete</a></td>";
+          </tr>
+<?php
+				}  // end while loop
     } else {
         echo "0 results";
     }
 ?>
       </table>
     </div>
+	</form>
 
 <?php 
     $conn->close();

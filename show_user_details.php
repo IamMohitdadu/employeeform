@@ -1,11 +1,12 @@
-<!--
+<?php
+/*
   file-name: show_user_details.php
   used-for: admin.php
   created-by: Mohit Dadu
   description: it is the user to show all the users at admin page.
   date:18/01/2017
--->
-
+*/
+?>
 
 <!DOCTYPE html>
 
@@ -21,8 +22,9 @@
 <?php
 		
   session_start();
-  if (isset($_SESSION['email'])) {
+  if (isset($_SESSION['email']) and (isset($_SESSION['name']))) {
       $email = $_SESSION['email'];
+			$name = $_SESSION['name'];
     }
 		
     //make connections
@@ -59,9 +61,12 @@
         <div class="row">
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="my-navbar">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav col-lg-10">
                 <li><a href="show_user_details.php"><strong>&nbsp;&nbsp;&nbsp;&nbsp;My Profile</strong></a></li>
               </ul>
+							<ul class="nav navbar-nav navbar col-lg-1">
+								<li><span style="font-style: italic; font-size: 20px;color: white;">hi <?php echo $name; ?></span></li>
+							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp; LOGOUT</a></li>
 							</ul>
@@ -70,6 +75,7 @@
         </div>
       </nav>
     </div>
+		<form action="updatedb.php" method="post">
     <div class="panel panel-default">
 			<div class="panel-heading">My Profile Details</div>
 			<div class="panel-body"></div>
@@ -78,10 +84,11 @@
           <th>ID</th>
           <th>NAME</th>
           <th>EMAIL</th>
+					<th></th>
         </tr>
    
 <?php
-    $sql = "SELECT Id, Name, Email FROM user WHERE Email= '$email'";
+    $sql = "SELECT Id, Name, Email, Password FROM user WHERE Email= '$email'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // output data of each row
@@ -90,18 +97,17 @@
           echo "<td>" . $row['Id']. "</td>";
           echo "<td>" . $row['Name']. "</td>";
           echo "<td>" . $row['Email'] . "</td>";
+					echo "<td><input type='submit' id='edit' name='edit' value='EDIT' onclick='edit()' style='display:block'>
+								<input type='button' id='save' name='edit' value='SAVE' onclick='save()' style='display:none'></td>";
           echo "</tr>";
         }  // end while loop
     } else {
-        echo "0 results";
+        echo "No Details Available";
     }
 ?>
       </table>
+			</form>
     </div>
-
-<?php 
-    $conn->close();
-?>
-    
+ 
   </body>
 </html>

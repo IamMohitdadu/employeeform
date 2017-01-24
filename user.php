@@ -6,6 +6,14 @@
 	date:18/01/2017
 -->
 
+
+<?php
+		session_start();
+		if(isset($_SESSION['name'])){
+				$name = $_SESSION['name'];
+		}
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -36,9 +44,12 @@
         <div class="row">
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="my-navbar">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav col-lg-10">
                 <li><a href="show_user_details.php"><strong>&nbsp;&nbsp;&nbsp;&nbsp; My Profile</strong></a></li>
               </ul>
+							<ul class="nav navbar-nav navbar col-lg-1">
+								<li><span style="font-style: italic; font-size: 20px;color: white;">hi <?php echo $name; ?></span></li>
+							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp; LOGOUT</a></li>
 							</ul>

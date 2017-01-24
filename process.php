@@ -52,7 +52,7 @@ date:18/01/2017
 		// execute if there is no error
 		if (!$error) {
 			//$pass=hash('sha256', $pass);
-			$sql = "SELECT Email, Password, Usertype FROM user WHERE Email = '$email' AND Password='$pass'";
+			$sql = "SELECT Id, Name, Email, Password, Usertype FROM user WHERE Email = '$email' AND Password='$pass'";
 			$res = $conn->query($sql);
 			$row=$res->fetch_assoc();
 			$count=$res->num_rows;
@@ -63,8 +63,10 @@ date:18/01/2017
 				}
 				// set the session 
 				session_start();
+				$_SESSION['id'] = $row['Id'];
 				$_SESSION['email'] = $email;
 				$_SESSION['pass'] = $pass;
+				$_SESSION['name'] = $row['Name'];
 				//SESSION['user'] = $row["id"];
 				if($row['Usertype'] === "Admin" ) {
 					header("Location: admin.php");

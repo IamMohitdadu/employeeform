@@ -35,7 +35,7 @@
       </div>
       <div class="col-md-7">
 	<div class="container-fluid header text-center">
-		<h1>Employee Management Portal</h1>
+	  <h1>Employee Management Portal</h1>
 	</div>
       </div>
       </div>
