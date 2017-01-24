@@ -9,20 +9,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8"/>
-    <title>LOGIN PAGE</title>
-    <link rel="stylesheet" type="text/css" href="asset/css/style.css"/>
+    <title>Add User</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="asset/vendors/css/bootstrap.css" /> 
   </head>
   <body>
+		<nav class="navbar navbar-default col-md-12">
+			<div class="row">
+				<div class="col-md-3">
+				  <img src="asset/images/logo.jpg" alt="logo" height="120px" width="120px">
+			  </div>
+				<div class="col-md-7">
+					<div class="container-fluid header text-center">
+					  <h1>Employee Management Portal</h1>		
+				  </div>
+				</div>
+			</div>
+		</nav>
+		<div class="marquee">
+			<marquee height=40> <h4 style="color: red;">Welcome to Employee Management Portal </h4></marquee>
+		</div>
 		<nav class="navbar navbar-inverse">
 			<div class="row">
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav col-lg-4">
-							<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp HOME</a></li>
+							<li class="active"><a href="admin.php"><span class="glyphicon glyphicon-home"></span>&nbsp HOME</a></li>
 						</ul>
-            <p><span class="col-lg-8" style="font-size: 50px">ADD USER</span></p>
+            <p><span class="col-lg-5" style="font-size: 35px; color: white;">ADD USER</span></p>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp; LOGOUT</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>

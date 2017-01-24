@@ -7,61 +7,75 @@ date:18/01/2017
 -->
 
 <?php
-    session_start();
+    // to connect the database
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "login";
+    $dbname = "employee";
     
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } 
-    
-    if ( isset($_SESSION['user'])!="" ) {
-        header("Location: home.php");
-       exit;
-    }
+	// Check connection
+	try{
+		$conn = new mysqli($servername, $username, $password, $dbname);
+	}
+	catch(Exception $e) {
+		echo  "Connection failed: " . $e->mysqli_connect_error();
+	}
     
     $error = false;
-  
-    if( isset($_POST['btn-login']) ) {
 	
-		$email = mysql_real_escape_string($_POST["email"]);
-		$pass =  mysql_real_escape_string($_POST["password"]);
-		$user_type = mysql_real_escape_string($_POST["userType"]); 
+    // execute if login 
+    if( isset($_POST['btn-login']) ) {
 		
+		$email = trim($_POST['email']);
+		$email = strip_tags($email);
+		$email = htmlspecialchars($email);
+		
+		$pass = trim($_POST['password']);
+		$pass = strip_tags($pass);
+		$pass = htmlspecialchars($pass);
+		// validation for email.
 		if (empty($email)) {
 			$error = true;
 			header("Location: login.php");
 			echo "Please enter your email address.";
+		} else if ( !filter_var($email,FILTER_VALIDATE_EMAIL)) {
+			$error = true;
+			$emailError = "Please enter valid email address.";
 		}
-		  
+		// validation for password  
 		if (empty($pass)) {
 			$error = true;
 			header("Location: login.php");
 			$passError = "Please enter your password.";
 		}
 		
+		// execute if there is no error
 		if (!$error) {
 			//$pass=hash('sha256', $pass);
-			$sql = "SELECT Email, Password, User_Type FROM user WHERE Email = '$email' AND Password='$pass'";
+			$sql = "SELECT Email, Password, Usertype FROM user WHERE Email = '$email' AND Password='$pass'";
 			$res = $conn->query($sql);
 			$row=$res->fetch_assoc();
 			$count=$res->num_rows;
-			if ($count == 1) {
-				//SESSION['user'] = $row["id"];
-				if ($row['User_Type'] == $user_type) {
-					if($user_type == "Admin" ) {
-						header("Location: admin.php");
-					} else {
-						header("Location: user.php");
-					}
-				} else {
-					 echo "Incorrect Credentials, Try again...";
+			if ($count === 1) {
+				if (isset($_POST['remember'])) {
+					setcookie('email', $email, time()+60*60*7);
+					setcookie('pass', $pass, time()+60*60*7);
 				}
-		    }
-	    }
+				// set the session 
+				session_start();
+				$_SESSION['email'] = $email;
+				$_SESSION['pass'] = $pass;
+				//SESSION['user'] = $row["id"];
+				if($row['Usertype'] === "Admin" ) {
+					header("Location: admin.php");
+				} else { 
+					header("Location: user.php");
+				}
+			} else {
+					 echo "Please Enter the valid details, Try again...";
+				}
+		} else {
+			header("Location: login.php");
+		}
 	}
 ?>

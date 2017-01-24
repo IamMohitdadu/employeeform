@@ -9,20 +9,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8"/>
-    <title>LOGIN PAGE</title>
-    <link rel="stylesheet" type="text/css" href="asset/css/style.css"/>
+    <title>REGISTER PAGE</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="asset/vendors/css/bootstrap.css" /> 
   </head>
   <body>
+		<nav class="navbar navbar-default col-md-12">
+			<div class="row">
+				<div class="col-md-3">
+				  <img src="asset/images/logo.jpg" alt="logo" height="120px" width="120px">
+			  </div>
+				<div class="col-md-7">
+					<div class="container-fluid header text-center">
+					  <h1>Employee Management Portal</h1>		
+				  </div>
+				</div>
+			</div>
+		</nav>
+		<div class="marquee">
+			<marquee height=40> <h4 style="color: red;">Welcome to Employee Management Portal </h4></marquee>
+		</div>
 		<nav class="navbar navbar-inverse">
 			<div class="row">
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp HOME</a></li>
-							<li><a href="register.php" style="color: green"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Registration </a></li>
-							<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
+						<ul class="nav navbar-nav nav-tabs nav-justified">
+							
+							<li><a href="register.php" style="font-weight: 900; color: lightblue;"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Registration </a></li>
+							<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
 						</ul>
 					</div>
 				</div>
@@ -43,13 +58,8 @@
 					</div>
 					<label class="control-label col-sm-4">Password:</label>
 					<div class="col-sm-6">
-						<input type="password" id="password" name="password" class="form-control" placeholder="Must be more than 6 characters"/>
+						<input type="password" id="password" name="password" class="form-control" placeholder="should be atleast 6 characters"/>
 						<!-- <p id="psd">Should be 6-character</p> -->
-					</div>
-					<label class="control-label col-sm-4">Confirm Password:</label>
-					<div class="col-sm-6">
-						<input type="password" id="cnf-password" name="cnf-password" class="form-control" placeholder="Must be more than 6 characters"/>
-						<!-- <p id="cnf-psd">Should be same as Password</p> -->
 					</div>
 					<label class="control-label col-sm-4">Register As:</label>
 					<div class = "col-sm-6">
@@ -62,7 +72,11 @@
 				</div>
 			</div>
 			<div class="form-style">
-				<center><input type='submit' class="btn btn-success" name='btn-signup' value='Sign Up'></center>
+				<div class="col-lg-6"></div>
+					<div class="col-lg-2">
+						<input type='submit' class="btn btn-lg btn-primary btn-block" name='btn-signup' value='Sign Up'>
+					</div>
+				<div class="col-lg-4"></div>
 			</div>      
     </form>
 		<!-- <script type="text/javascript" src="asset/js.script.js"></script> -->

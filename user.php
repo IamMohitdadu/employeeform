@@ -10,22 +10,39 @@
 
 <html>
   <head>
-    <meta charset="utf-8"/>
-    <title>LOGIN PAGE</title>
-    <link rel="stylesheet" type="text/css" href="asset/css/style.css" />
+    <title>HOME PAGE</title>
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="asset/vendors/css/bootstrap.css" /> 
   </head>
   <body>
+		<nav class="navbar navbar-default col-md-12">
+			<div class="row">
+				<div class="col-md-3">
+				  <img src="asset/images/logo.jpg" alt="logo" height="120px" width="120px">
+			  </div>
+				<div class="col-md-7">
+					<div class="container-fluid header text-center">
+					  <h1>Employee Management Portal</h1>		
+				  </div>
+				</div>
+			</div>
+		</nav>
+		<div class="marquee">
+			<marquee height=40> <h4 style="color: red;">Welcome to Employee Management Portal </h4></marquee>
+		</div>
     <div>
       <nav class="navbar navbar-inverse">
         <div class="row">
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="my-navbar">
               <ul class="nav navbar-nav">
-                <li><a href="add_user_details.php"><strong>ADD DETAILS</strong></a></li>
-                <li><a href="show_user_details.php"><strong>SHOWS DETAILS</strong></a></li>
+                <li><a href="show_user_details.php"><strong>&nbsp;&nbsp;&nbsp;&nbsp; My Profile</strong></a></li>
               </ul>
-            </div>
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp; LOGOUT</a></li>
+							</ul>
+						</div>
           </div>
         </div>
       </nav>

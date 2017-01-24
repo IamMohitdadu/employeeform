@@ -9,35 +9,80 @@
 <?php
 
 if(isset($_POST['btn-signup'])) {
-    $name = mysql_real_escape_string($_POST["name"]);
-    $email = mysql_real_escape_string($_POST["email"]);
-    $pass =  mysql_real_escape_string($_POST["password"]);
-    $user_type = mysql_real_escape_string($_POST["userType"]); 
+    
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "login";
+    $dbname = "employee";
     
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      
-    } catch(PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
-    }
-     
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $sql = "INSERT INTO user (Name, Email, Password, User_Type )
-        VALUES ('$name', '$email', '$pass', '$user_type')";
-        // use exec() because no results are returned
-        $conn->exec($sql);
-        echo ('New record created successfully');
-        exit();
+    $error = false;
+    try{
+        // Check connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+	}
+	catch(Exception $e) {
+		echo  "Connection failed: " . $e->mysqli_connect_error();
+	}
+    
+    // clean user input to prevent sql injection.
+    $name = trim($_POST['name']);
+    $name = strip_tags($name);
+    $name = htmlspecialchars($name);
+    
+    $email = trim($_POST['email']);
+    $email = strip_tags($email);
+    $email = htmlspecialchars($email);
+    
+    $pass = trim($_POST['password']);
+    $pass = strip_tags($pass);
+    $pass = htmlspecialchars($pass);
+
+    $user = trim($_POST['userType']);
+    $user = strip_tags($user);
+    $user = htmlspecialchars($user);
+    
+    // name validation
+    if (empty($name)) {
+      $error = true;
+      $nameError = "Please enter your full name.";
+    } else if (strlen($name) < 3) {
+      $error = true;
+      $nameError = "Name must have atleat 3 characters.";
     } else {
-        echo ('Please Enter a valid email address');
-        exit();
+      $nameError = "";
     }
-  }
+    // email validation
+    if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
+      $error = true;
+      $emailError = "Please enter valid email address.";
+    } else {
+      $emailError = "";
+    }
+    
+    // password validation
+    if (empty($pass)) {
+      $error = true;
+      $passError = "Please enter password.";
+    } else if (strlen($pass) < 6) {
+      $error = true;
+      $passError = "Password must have atleast 6 characters.";
+    } else {
+      $passError = "";
+    }
+    
+    // execute if there is no error
+    if(!$error){
+        $sql = "INSERT INTO user (Name, Email, Password, Usertype )
+                VALUES ('$name', '$email', '$pass', '$user')";
+        $res= $conn->query($sql);
+        if ($res) {
+            echo "successfully registered.";
+            header("Location: login.php");
+        } 
+    }else {
+        $errMSG = "Something went wrong, try again later...";
+        echo "$errMSG";
+    }
+}
 
 ?>
