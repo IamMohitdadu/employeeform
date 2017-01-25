@@ -1,9 +1,9 @@
 <?php
 /*
   file-name: show_user_details.php
-  used-for: admin.php
+  used-for: user.php
   created-by: Mohit Dadu
-  description: it is the user to show all the users at admin page.
+  description: it is the user profile details.
   date:18/01/2017
 */
 ?>
@@ -105,9 +105,8 @@
         echo "No Details Available";
     }
 ?>
-      </table>
-			</form>
+      </table>			
     </div>
- 
+ </form>
   </body>
 </html>

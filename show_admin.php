@@ -61,18 +61,18 @@
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="my-navbar">
               <ul class="nav navbar-nav col-lg-10">
-                <li><a href="add_user.php"><strong>ADD USER</strong></a></li>
-                <li><a href="add_admin.php"><strong>ADD ADMIN</strong></a></li>
-							  <li><a href="show_user.php"><strong>SHOW USERS</strong></a></li>
+                <!-- <li><a href="add_user.php"><strong>ADD USER</strong></a></li>
+                <li><a href="add_admin.php"><strong>ADD ADMIN</strong></a></li> -->
+ 	        <li><a href="show_user.php"><strong>SHOW USERS</strong></a></li>
                 <li><a href="show_admin.php"><strong>SHOW ADMINS</strong></a></li>
               </ul>
-							<ul class="nav navbar-nav navbar col-lg-1">
-								<li><span style="font-style: italic; font-size: 20px;color: white;">hi <?php echo $name; ?></span></li>
-							</ul>
-							<ul class="nav navbar-nav navbar-right">
-								<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp; LOGOUT</a></li>
-							</ul>
-						</div>
+		<ul class="nav navbar-nav col-lg-1">
+			<li><span style="font-style: italic; font-size: 20px;color: white;">hi <?php echo $name; ?></span></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp; LOGOUT</a></li>
+		</ul>
+	</div>
           </div>
         </div>
       </nav>
@@ -85,20 +85,25 @@
           <th>ID</th>
           <th>NAME</th>
           <th>EMAIL</th>
+					<th>PASSWORD</th>
+					<th></th>
+					<th></th>
         </tr>
    
 <?php
-    $sql = "SELECT Id, Name, Email FROM user WHERE Usertype='Admin'";
+    $sql = "SELECT Id, Name, Email, Password FROM user WHERE Usertype='Admin'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
 ?>
 <tr>
-          <td><?php echo $row["Id"]; ?></td>";
-          <td><?php echo $row["Name"]; ?></td>";
-          <td><?php echo $row["Email"]; ?></td>";
-					<td><a href="delete_user.php?id=<?php echo $row['Id']; ?>">Delete</a></td>";
+          <td><?php echo $row["Id"]; ?></td>
+          <td><?php echo $row["Name"]; ?></td>
+          <td><?php echo $row["Email"]; ?></td>
+					<td><?php echo $row["Password"]; ?></td>
+					<td><a href="update_admindb.php?id=<?php echo $row['Id']; ?>">Edit</a></td>
+					<td><a href="delete_user.php?id=<?php echo $row['Id']; ?>">Delete</a></td>
           </tr>
 <?php
 				}  // end while loop

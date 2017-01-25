@@ -6,6 +6,96 @@
   date:18/01/2017
 -->
 
+<!--
+  file-name: mydb.php
+  used-for: register.php
+  created-by: Mohit Dadu
+  description: it is the php file to connect with database and insert data into table.
+  date:19/01/2017
+-->
+
+<?php
+
+if(isset($_POST['btn-signup'])) {
+    
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "employee";
+    
+    $error = false;
+    try{
+        // Check connection
+				$conn = new mysqli($servername, $username, $password, $dbname);
+		}
+		catch(Exception $e) {
+				echo  "Connection failed: " . $e->mysqli_connect_error();
+		}
+    
+    // clean user input to prevent sql injection.
+    $name = trim($_POST['name']);
+    $name = strip_tags($name);
+    $name = htmlspecialchars($name);
+    
+    $email = trim($_POST['email']);
+    $email = strip_tags($email);
+    $email = htmlspecialchars($email);
+    
+    $pass = trim($_POST['password']);
+    $pass = strip_tags($pass);
+    $pass = htmlspecialchars($pass);
+
+    $user = trim($_POST['userType']);
+    $user = strip_tags($user);
+    $user = htmlspecialchars($user);
+    
+    // name validation
+    if (empty($name)) {
+      $error = true;
+      $nameError = "Please enter your full name.";
+    } else if (strlen($name) < 3) {
+      $error = true;
+      $nameError = "Name must have atleat 3 characters.";
+    } else {
+      $nameError = "";
+    }
+    // email validation
+    if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
+      $error = true;
+      $emailError = "Please enter valid email address.";
+    } else {
+      $emailError = "";
+    }
+    
+    // password validation
+    if (empty($pass)) {
+      $error = true;
+      $passError = "Please enter password.";
+    } else if (strlen($pass) < 6) {
+      $error = true;
+      $passError = "Password must have atleast 6 characters.";
+    } else {
+      $passError = "";
+    }
+    
+    // execute if there is no error
+    if(!$error){
+        $sql = "INSERT INTO user (Name, Email, Password, Usertype )
+                VALUES ('$name', '$email', '$pass', '$user')";
+        $res= $conn->query($sql);
+        if ($res) {
+            echo '<script language="javascript">';
+						echo 'alert("Registered successfully. Please Login.....")';
+						echo '</script>';
+            
+        } else {
+        $errMSG = "User Already Exists";
+		}
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -43,30 +133,47 @@
 				</div>
 			</div>
 		</nav>
-		<form action="mydb.php" class="form-horizontal container" name="LoginForm" method="post" id="form">
+		<form action="" class="form-horizontal container" name="LoginForm" method="post" id="form">
 			<div class="container-fluid form-group">
 				<div class="col-sm-10">
 					<label class="control-label col-sm-4">Name:</label>
 					<div class="col-sm-6">
 						<input type="text" id="name" name="name" class="form-control" placeholder="Your Name"/>
-						<!-- <p id="usr">Enter valid email address</p> -->
+						<span id="mailinfo">
+            <?php
+              if(isset($nameError)){
+                echo $nameError;
+              }
+             ?>
+          </span><br/>
 					</div>
 					<label class="control-label col-sm-4">User name:</label>
 					<div class="col-sm-6">
 						<input type="text" id="email" name="email" class="form-control" placeholder="Email address"/>
-						<!-- <p id="usr">Enter valid email address</p> -->
+						<span id="mailinfo">
+            <?php
+              if(isset($emailError)){
+                echo $emailError;
+              }
+             ?>
+          </span><br/>
 					</div>
 					<label class="control-label col-sm-4">Password:</label>
 					<div class="col-sm-6">
 						<input type="password" id="password" name="password" class="form-control" placeholder="should be atleast 6 characters"/>
-						<!-- <p id="psd">Should be 6-character</p> -->
+						<span id="mailinfo">
+            <?php
+              if(isset($passError)){
+                echo $passError;
+              }
+             ?>
+          </span><br/>
 					</div>
 					<label class="control-label col-sm-4">Register As:</label>
 					<div class = "col-sm-6">
 						<select id="select-user" class="from-control" name="userType">
 							<option value="Admin">Admin</option>
 							<option value="User">User</option>
-							<!-- <p id="lgr">Select User Type</p> -->
 						</select>
 					</div>
 				</div>
@@ -79,6 +186,12 @@
 				<div class="col-lg-4"></div>
 			</div>      
     </form>
-		<!-- <script type="text/javascript" src="asset/js.script.js"></script> -->
+		<div class="col-lg-8"><center><span style="color: red">
+			<?php
+      if (isset($errMSG)) {
+        echo "$errMSG";
+      }
+     ?>
+		</span></center></div>
   </body>
 </html>

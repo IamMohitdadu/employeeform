@@ -99,25 +99,7 @@
 
 ?>
       </table>
-			</form>
-    </div>
- 
+	</div>
+	</form> 
   </body>
 </html>
-
-<!--    // execute if there is no error
-    if(!$error){
-        $sql = "INSERT INTO user (Name, Email, Password, Usertype )
-                VALUES ('$name', '$email', '$pass', '$user')";
-        $res= $conn->query($sql);
-        if ($res) {
-            echo "successfully registered.";
-            header("Location: login.php");
-        } 
-    }else {
-        $errMSG = "Something went wrong, try again later...";
-        echo "$errMSG";
-    }
-}
-
-?>

@@ -1,8 +1,8 @@
 <!--
   file-name: user.php
-  used-for: form for login as user
+  used-for: login.php
   created-by: Mohit Dadu
-  description: it shows the option for adding new user or admin.
+  description: it shows the user home page.
 	date:18/01/2017
 -->
 

@@ -2,7 +2,7 @@
   file-name: savedb.php
   used-for: updatedb.php
   created-by: Mohit Dadu
-  description: it is the php file to connect with database and update data into table.
+  description: it is the php file to connect with database and update data into MySql table.
   date:19/01/2017
 -->
 
