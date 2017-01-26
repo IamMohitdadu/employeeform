@@ -1,27 +1,14 @@
 <?php
-/*
-  file-name: show_user_details.php
-  used-for: user.php
-  created-by: Mohit Dadu
-  description: it is the user profile details.
-  date:18/01/2017
+
+/**
+ * file-name: show_user_details.php
+ * used-for: user.php
+ * created-by: Mohit Dadu
+ * description: it is the user profile details.
+ * date:18/01/2017
 */
-?>
 
-<!DOCTYPE html>
-
-<html>
-  <head>
-    <title>Show User</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="asset/vendors/css/bootstrap.css" /> 
-  </head>
-  <body>
-
-<?php
-		
-  session_start();
+session_start();
   if (isset($_SESSION['email']) and (isset($_SESSION['name']))) {
       $email = $_SESSION['email'];
 			$name = $_SESSION['name'];
@@ -37,10 +24,20 @@
         // Check connection
 				$conn = new mysqli($servername, $username, $password, $dbname);
 			} catch(Exception $e) {
-				echo  "Connection failed: " . $e->mysqli_connect_error();
+					echo  "Connection failed: " . $e->mysqli_connect_error();
 			}
-
 ?>
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Show User</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="asset/vendors/css/bootstrap.css" /> 
+  </head>
+  <body>
 		<nav class="navbar navbar-default col-md-12">
 			<div class="row">
 				<div class="col-md-3">
@@ -61,12 +58,18 @@
         <div class="row">
           <div class="container-fluid">
             <div class="collapse navbar-collapse" id="my-navbar">
-              <ul class="nav navbar-nav col-lg-10">
-                <li><a href="show_user_details.php"><strong>&nbsp;&nbsp;&nbsp;&nbsp;My Profile</strong></a></li>
-              </ul>
+              <div class="nav navbar-nav col-lg-9">
+								<div class="col-lg-6">
+									<ul class="nav navbar-nav nav-tabs nav-justified ">
+										<li><a href="user.php"><strong><span style="font-size: 20px;">My Profile</span></strong></a></li>
+										<li class="active"><a href="show_user_details.php"><strong><span style="font-size: 20px;">Edit Details</span></strong></a></li>
+									</ul>
+							  </div>
+							</div>
 							<ul class="nav navbar-nav navbar col-lg-1">
-								<li><span style="font-style: italic; font-size: 20px;color: white;">hi <?php echo $name; ?></span></li>
-							</ul>
+								<p style="font-style: italic; color: white;" class="navbar-text">hi <?php echo $name; ?></p>
+								<!--<li><span style="font-style: italic; font-size: 20px;color: white;">hi <?php echo $name; ?></span></li>
+							--></ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp; LOGOUT</a></li>
 							</ul>
@@ -76,16 +79,16 @@
       </nav>
     </div>
 		<form action="updatedb.php" method="post">
-    <div class="panel panel-default">
-			<div class="panel-heading">My Profile Details</div>
-			<div class="panel-body"></div>
-      <table  class="table table-striped table-bordered table-hover table-condensed">
-        <tr>
-          <th>ID</th>
-          <th>NAME</th>
-          <th>EMAIL</th>
-					<th></th>
-        </tr>
+			<div class="panel panel-default">
+				<div class="panel-heading">My Profile Details</div>
+				<div class="panel-body"></div>
+				<table  class="table table-striped table-bordered table-hover table-condensed">
+					<tr>
+						<th>ID</th>
+						<th>NAME</th>
+						<th>EMAIL</th>
+						<th></th>
+					</tr>
    
 <?php
     $sql = "SELECT Id, Name, Email, Password FROM user WHERE Email= '$email'";
@@ -105,8 +108,8 @@
         echo "No Details Available";
     }
 ?>
-      </table>			
-    </div>
- </form>
+				</table>			
+			</div>
+	  </form>
   </body>
 </html>

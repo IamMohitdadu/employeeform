@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * file-name: detaildb.php
+ * used-for: show_user.php
+ * created-by: Mohit Dadu
+ * description: it is the used to show the user detail from database.
+ * date:24/01/2017
+ * */
+
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -9,11 +17,11 @@
     $error = false;
     try{
         // Check connection
-		$conn = new mysqli($servername, $username, $password, $dbname);
-	}
-	catch(Exception $e) {
-		echo  "Connection failed: " . $e->mysqli_connect_error();
-	}
+				$conn = new mysqli($servername, $username, $password, $dbname);
+		}
+		catch(Exception $e) {
+				echo  "Connection failed: " . $e->mysqli_connect_error();
+		}
     
     // clean user input to prevent sql injection.
     $name = trim($_POST['name']);

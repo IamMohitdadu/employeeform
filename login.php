@@ -67,10 +67,7 @@
 			$row=$res->fetch_assoc();
 			$count=$res->num_rows;
 			if ($count === 1) {
-				if (isset($_POST['remember'])) {
-					setcookie('email', $email, time()+60*60*7);
-					setcookie('pass', $pass, time()+60*60*7);
-				}
+				
 				// set the session 
 				session_start();
 				$_SESSION['id'] = $row['Id'];
@@ -85,7 +82,7 @@
 				}
 			} else {
 				$err = "Please Enter the valid details, Try again...";
-				}
+			}
 		} 
 	}
 ?>		
@@ -118,10 +115,10 @@
 	  <div class="row">
 		<div class="container-fluid">
 		  <div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav nav-tabs nav-justified">
-			  <li><a href="register.php"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Registration </a></li>
-			  <li><a href="login.php" style="font-weight: 900; color: lightblue;"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
-			</ul>
+				<ul class="nav navbar-nav nav-tabs nav-justified">
+					<li><a href="register.php"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Registration </a></li>
+					<li><a href="login.php" style="font-weight: 900; color: lightblue;"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
+				</ul>
 		  </div>
 		</div>
       </div>
@@ -129,47 +126,43 @@
     <form action="" class="form-horizontal container" name="LoginForm" method="post" id="form">
       <div class="container-fluid form-group">
 		<div class="col-sm-10">
-		<label class="control-label col-sm-4">User name:</label>
-		<div class="col-sm-6">
-		  <input type="text" id="email" name="email" class="form-control" placeholder="Email address"/>
-		  <span id="name-info">
-			<?php
-			if(isset($emailError)){
-			  echo $emailError;
-			} ?>
-		  </span><br/>
-		</div>
-		<br>
-		<label class="control-label col-sm-4">Password:</label>
-		<div class="col-sm-6">
-		  <input type="password" id="password" name="password" class="form-control" placeholder="Must be more than 6 characters"/>
+		  <label class="control-label col-sm-4">User name:</label>
+		  <div class="col-sm-6">
+		    <input type="text" id="email" name="email" class="form-control" placeholder="Email address"/>
 			<span id="name-info">
-				<?php
+			  <?php
+				if(isset($emailError)){
+				  echo $emailError;
+				} ?>
+			</span><br/>
+		  </div>
+		  <br>
+		  <label class="control-label col-sm-4">Password:</label>
+		  <div class="col-sm-6">
+		    <input type="password" id="password" name="password" class="form-control" placeholder="Must be more than 6 characters"/>
+			<span id="name-info">
+			  <?php
 				if(isset($passError)){
 				  echo $passError;
 				} ?>
 			</span><br/>	  
-		</div>
-		<div class="col-sm-10">
-		  <center><input type="checkbox" name="remember" value="1">Remember me </center>
-		</div>
+		  </div>
+	    </div>
+      </div>
+      <div class="form-style col-lg-12">
+	    <div class="col-lg-6"></div>
+	    <div class="col-lg-2">
+	      <input type="submit" class="btn btn-lg btn-primary btn-block" name="btn-login" value="Login">
+	    </div>
+	    <div class="col-lg-4"></div>
 	  </div>
-    </div>
-    <div class="form-style col-lg-12">
-	<div class="col-lg-4"></div>
-	<div class="col-lg-2"><a href="forget.php"><span style="font-size: medium;">Forget Password</span></a></div>
-	<div class="col-lg-2">
-	  <input type="submit" class="btn btn-lg btn-primary btn-block" name="btn-login" value="Login">
-	</div>
-	<div class="col-lg-4"></div>
-    </div>
-    <div class="form-style col-lg-8"></div>    
-        </form>
-	<span id="name-info">
-            <?php
-            if(isset($err)){
-              echo $err;
-            } ?>
-          </span><br/>
+      <div class="form-style col-lg-8"></div>    
+    </form>
+    <span id="name-info">
+        <?php
+          if(isset($err)){
+            echo $err;
+          } ?>
+    </span><br/>
   </body>
 </html>

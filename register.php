@@ -1,20 +1,13 @@
-<!--
-  file-name: register.php
-  used-for: form for registration of user and admin.
-  created-by: Mohit Dadu
-  description: it is the php file which redirect the user to the user login or admin login page.
-  date:18/01/2017
--->
-
-<!--
-  file-name: mydb.php
-  used-for: register.php
-  created-by: Mohit Dadu
-  description: it is the php file to connect with database and insert data into table.
-  date:19/01/2017
--->
 
 <?php
+
+/**
+ * file-name: register.php
+ * used-for: form for registration of user and admin.
+ * created-by: Mohit Dadu
+ * description: it is the php file which redirect the user to the user login or admin login page.
+ * date:18/01/2017
+*/
 
 if(isset($_POST['btn-signup'])) {
     
@@ -124,8 +117,7 @@ if(isset($_POST['btn-signup'])) {
 			<div class="row">
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav nav-tabs nav-justified">
-							
+						<ul class="nav navbar-nav nav-tabs nav-justified">							
 							<li><a href="register.php" style="font-weight: 900; color: lightblue;"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Registration </a></li>
 							<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
 						</ul>
@@ -186,12 +178,14 @@ if(isset($_POST['btn-signup'])) {
 				<div class="col-lg-4"></div>
 			</div>      
     </form>
-		<div class="col-lg-8"><center><span style="color: red">
-			<?php
-      if (isset($errMSG)) {
-        echo "$errMSG";
-      }
-     ?>
-		</span></center></div>
+		<div class="col-lg-8">
+		  <center><span style="color: red">
+				<?php
+					if (isset($errMSG)) {
+						echo "$errMSG";
+					}
+			  ?>
+			</span></center>
+		</div>
   </body>
 </html>
