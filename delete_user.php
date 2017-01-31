@@ -15,8 +15,19 @@
 	if (isset($_GET['id'])) {
 		
 		$id = $_GET['id'];
+		// find the associate layout
+		$request = $fm->newFindCommand('registration');
+		$request->addFindCriterion('rec_id', $id);
+		$result = $request->execute();
+		$records = $result->getRecords();
+		foreach ($records as $record){
+			$user = $record->getField('Usertype');
+		}
+		
+		// check for existing record using record Id
 		$rec = $fm->getRecordById('registration', $id);
 		$result = $rec->delete();
+		
 		// Checking Errors 
 		if (FileMaker::isError($result)) {
 		echo $result->getMessage();
@@ -25,9 +36,14 @@
 			} else {
 				echo 'No Records Found (Error Code: '.$result->code.')';
 			}
-		} else {
-			header("Location: admin.php");
 		}
 	}
+	
+	if($user === 'User'){
+		header("Location: show_user.php");
+	} else {
+		header("Location: show_admin.php");
+	}
 ?>
+
 		

@@ -10,14 +10,20 @@
 */
 
 	if(isset($_POST['save'])) {
+
+		// starting the session 
+		session_start();
+		
+		// checking the session is present or not
+		if (!isset($_SESSION['email'])) {
+			header("Location: login.php");
+		}
+		// assign session to the session valriable
+		$email = $_SESSION['email'];
+		$id = $_SESSION['id'];
 		
 		$error = false;
-		session_start();
-		if((isset($_SESSION['email']))){
-			$id = $_SESSION['id'];
-			$email = $_SESSION['email'];
-		}
-
+		
 		// to connect the database
 		require_once ('filemakerapi/FileMaker.php');
 		$fm = new FileMaker('login', '172.16.9.62', 'admin', 'Mohit@249d');
@@ -74,7 +80,7 @@
 					$record->setField('Password', $pass);
 					$record->commit();
 				}	
-				header("Location: show_user_details.php");
+				header("Location: user.php");
 			}
 			
 				

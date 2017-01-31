@@ -15,7 +15,7 @@
 	$request = $fm->newFindCommand('registration');
 	
     // execute if login button is pressed
-    if( isset($_POST['btn-login']) ) {
+    if( isset($_POST['btn-login'])) {
 		
 		$error = false;
 		
@@ -50,9 +50,9 @@
 			$result = $request->execute();
 			$records = $result->getRecords();
 			
-			if (FileMaker::isError($records)) {
+			if(FileMaker::isError($records)) {
 				echo $records->getMessage();
-				if (! isset($result->code) || strlen(trim($result->code)) < 1) {
+				if(! isset($result->code) || strlen(trim($result->code)) < 1) {
 					echo 'Please try again....';
 				} else {
 					echo 'No Records Found';
@@ -87,15 +87,14 @@
 				$err = "Please Enter the valid details, Try again...";
 		} 
 	}
-?>		
-		
+?>				
 <!DOCTYPE html>
 <html>
   <head>
     <title>LOGIN PAGE</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="asset/vendors/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="asset/vendors/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="asset/css/styles.css" /> 
   </head>
   <body>
@@ -112,16 +111,22 @@
       </div>
     </nav>
 	<div class="marquee">
-	  <marquee height=40> <h4 style="color: red;">Welcome to Employee Management Portal </h4></marquee>
+	  <marquee height=40>
+	    <h4 style="color: red;">Welcome to Employee Management Portal </h4>
+	  </marquee>
 	</div>
 	<nav class="navbar navbar-inverse">
 	  <div class="row">
 		<div class="container-fluid">
 		  <div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav nav-tabs nav-justified">
-					<li><a href="register.php"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Registration </a></li>
-					<li><a href="login.php" style="font-weight: 900; color: lightblue;"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
-				</ul>
+		    <ul class="nav navbar-nav nav-tabs nav-justified">
+			  <li><a href="register.php">
+				<span class="glyphicon glyphicon-user"></span>
+				&nbsp;&nbsp;Registration </a></li>
+			  <li><a href="" style="font-weight: 900; color: lightblue;">
+				<span class="glyphicon glyphicon-log-in"></span>
+				&nbsp;&nbsp;Login</a></li>
+		    </ul>
 		  </div>
 		</div>
       </div>
@@ -131,7 +136,8 @@
 		<div class="col-sm-10">
 		  <label class="control-label col-sm-4">User name:</label>
 		  <div class="col-sm-6">
-		    <input type="text" id="email" name="email" class="form-control" placeholder="Email address" vlaue = "<?php echo $email; ?>"/>
+		    <input type="text" id="email" name="email" class="form-control" 
+				placeholder="Email address" vlaue = "<?php echo $email; ?>"/>
 			<span id="name-info" style="color: red">
 			  <?php
 				if(isset($emailError)){
@@ -142,7 +148,8 @@
 		  <br>
 		  <label class="control-label col-sm-4">Password:</label>
 		  <div class="col-sm-6">
-		    <input type="password" id="password" name="password" class="form-control" placeholder="Must be more than 6 characters"/>
+		    <input type="password" id="password" name="password" 
+				class="form-control" placeholder="Must be more than 6 characters"/>
 			<span id="name-info" style="color: red"> 
 			  <?php
 				if(isset($passError)){
@@ -155,7 +162,8 @@
       <div class="form-style col-lg-12">
 	    <div class="col-lg-6"></div>
 	    <div class="col-lg-2">
-	      <input type="submit" class="btn btn-lg btn-primary btn-block" name="btn-login" value="Login">
+	      <input type="submit" class="btn btn-lg btn-primary btn-block" 
+			name="btn-login" value="Login">
 	    </div>
 	    <div class="col-lg-4"></div>
 	  </div>

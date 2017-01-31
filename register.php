@@ -31,10 +31,6 @@ if(isset($_POST['btn-signup'])) {
     $pass = trim($_POST['password']);
     $pass = strip_tags($pass);
     $pass = htmlspecialchars($pass);
-
-    $user = trim($_POST['userType']);
-    $user = strip_tags($user);
-    $user = htmlspecialchars($user);
     
     // name validation
     if (empty($name)) {
@@ -69,122 +65,113 @@ if(isset($_POST['btn-signup'])) {
     if(!$error){
 		
 		$record = $fm->createRecord('registration');
-
 		$record->setField('Name', $name);
 		$record->setField('Email', $email);
 		$record->setField('Password', $pass);
-		$record->setField('Usertype', $user);
-		
+		$record->setField('Usertype', 'User');
 		$result = $record->commit();
 		
 		if (FileMaker::isError($result)) { 
-			$errMSG = 'email already exists';
+			$errMSG = 'Email already exists';
 		} else {
-			$errMSG = 'record updated successfully';
+			$errMSG = 'Registered successfully. Please login...........';
 		}
-        
     }
 }
 
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>
     <title>REGISTER PAGE</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="asset/vendors/css/bootstrap.css" /> 
   </head>
   <body>
-		<nav class="navbar navbar-default col-md-12">
-			<div class="row">
-				<div class="col-md-3">
-				  <img src="asset/images/logo.jpg" alt="logo" height="120px" width="120px">
-			  </div>
-				<div class="col-md-7">
-					<div class="container-fluid header text-center">
-					  <h1>Employee Management Portal</h1>		
-				  </div>
-				</div>
-			</div>
-		</nav>
-		<div class="marquee">
-			<marquee height=40> <h4 style="color: red;">Welcome to Employee Management Portal </h4></marquee>
+	<nav class="navbar navbar-default col-md-12">
+	  <div class="row">
+		<div class="col-md-3">
+		  <img src="asset/images/logo.jpg" alt="logo" height="120px" width="120px">
+	    </div>
+		<div class="col-md-7">
+		  <div class="container-fluid header text-center">
+	        <h1>Employee Management Portal</h1>		
+		  </div>
 		</div>
-		<nav class="navbar navbar-inverse">
-			<div class="row">
-				<div class="container-fluid">
-					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav nav-tabs nav-justified">							
-							<li><a href="register.php" style="font-weight: 900; color: lightblue;"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Registration </a></li>
-							<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</nav>
-		<form action="" class="form-horizontal container" name="LoginForm" method="post" id="form">
-			<div class="container-fluid form-group">
-				<div class="col-sm-10">
-					<label class="control-label col-sm-4">Name:</label>
-					<div class="col-sm-6">
-						<input type="text" id="name" name="name" class="form-control" placeholder="Your Name"/>
-						<span id="mailinfo" style="color: red">
-            <?php
-              if(isset($nameError)){
-                echo $nameError;
-              }
-             ?>
-          </span><br/>
-					</div>
-					<label class="control-label col-sm-4">User name:</label>
-					<div class="col-sm-6">
-						<input type="text" id="email" name="email" class="form-control" placeholder="Email address"/>
-						<span id="mailinfo" style="color: red">
-            <?php
-              if(isset($emailError)){
-                echo $emailError;
-              }
-             ?>
-          </span><br/>
-					</div>
-					<label class="control-label col-sm-4">Password:</label>
-					<div class="col-sm-6">
-						<input type="password" id="password" name="password" class="form-control" placeholder="should be atleast 6 characters"/>
-						<span id="mailinfo" style="color: red">
-            <?php
-              if(isset($passError)){
-                echo $passError;
-              }
-             ?>
-          </span><br/>
-					</div>
-					<label class="control-label col-sm-4">Register As:</label>
-					<div class = "col-sm-6">
-						<select id="select-user" class="from-control" name="userType">
-							<option value="Admin">Admin</option>
-							<option value="User">User</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="form-style">
-				<div class="col-lg-6"></div>
-					<div class="col-lg-2">
-						<input type='submit' class="btn btn-lg btn-primary btn-block" name='btn-signup' value='Sign Up'>
-					</div>
-				<div class="col-lg-4"></div>
-			</div>      
-    </form>
-		<div class="col-lg-8">
-		  <center><span style="color: red">
+	  </div>
+	</nav>
+	<div class="marquee">
+	  <marquee height=40> <h4 style="color: red;">Welcome to Employee Management Portal </h4></marquee>
+	</div>
+	<nav class="navbar navbar-inverse">
+	  <div class="row">
+		<div class="container-fluid">
+		  <div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav nav-tabs nav-justified">							
+			  <li><a href="register.php" style="font-weight: 900; color: lightblue;">
+				<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Registration </a></li>
+			  <li><a href="login.php"><span class="glyphicon glyphicon-log-in">
+				</span>&nbsp;&nbsp;Login</a></li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+	</nav>
+    <form action="" class="form-horizontal container" name="LoginForm" method="post" id="form">
+	  <div class="container-fluid form-group">
+		<div class="col-sm-10">
+		  <label class="control-label col-sm-4">Name:</label>
+		  <div class="col-sm-6">
+			<input type="text" id="name" name="name" class="form-control" placeholder="Your Name"/>
+		  	  <span id="mailinfo" style="color: red;">
 				<?php
-					if (isset($errMSG)) {
-						echo "$errMSG";
-					}
-			  ?>
-			</span></center>
+				if(isset($nameError)){
+				echo $nameError;
+				}
+				?>
+			  </span><br/>
+		  </div>
+		  <label class="control-label col-sm-4">User name:</label>
+		  <div class="col-sm-6">
+			<input type="text" id="email" name="email" class="form-control" placeholder="Email address"/>
+	  		  <span id="mailinfo" style="color: red">
+				<?php
+				  if(isset($emailError)){
+					echo $emailError;
+				  }
+				 ?>
+              </span><br/>
+		  </div>
+		  <label class="control-label col-sm-4">Password:</label>
+		  <div class="col-sm-6">
+			<input type="password" id="password" name="password" class="form-control" placeholder="should be atleast 6 characters"/>
+			  <span id="mailinfo" style="color: red">
+				<?php
+				  if(isset($passError)){
+					echo $passError;
+				  }
+				 ?>
+			</span><br/>
+		  </div>
 		</div>
+	  </div>
+	  <div class="form-style">
+		<div class="col-lg-6"></div>
+		<div class="col-lg-2">
+		  <input type='submit' class="btn btn-lg btn-primary btn-block" name='btn-signup' value='Sign Up'>
+		</div>
+	    <div class="col-lg-4"></div>
+	  </div>      
+    </form>
+	<div class="col-lg-8">
+	  <center><span style="color: red">
+		<?php
+			if (isset($errMSG)) {
+				echo "$errMSG";
+			}
+		?>
+	  </span></center>
+	</div>
   </body>
 </html>
