@@ -13,7 +13,9 @@
 	// checking the session is present or not
 	if (!isset($_SESSION['email'])) {
 		header("Location: login.php");
+		exit;
 	}
+	
 	// assign session to the session valriable
 	$id = $_SESSION['id'];
 	$nm = $_SESSION['name'];
@@ -21,8 +23,7 @@
 	$pass = $_SESSION['pass'];
 	
 	// to connect the database
-    require_once ('filemakerapi/FileMaker.php');
-	$fm = new FileMaker('login', '172.16.9.62', 'admin', 'Mohit@249d');
+    include("./config/config.php");
 	
 	if (isset($_GET['id'])){
 
@@ -129,7 +130,6 @@
 		}
 	}
 ?>	
-
 <!DOCTYPE html>
 <html>
   <head>

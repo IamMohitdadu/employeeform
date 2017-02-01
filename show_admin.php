@@ -15,20 +15,19 @@
 	// checking the session is present or not
 	if (!isset($_SESSION['email'])) {
 		header("Location: login.php");
+		exit;
 	}
 	// assign session to the session valriable
 	$email = $_SESSION['email'];
 	$nm = $_SESSION['name'];
 
 	// to connect the database
-    require_once ('filemakerapi/FileMaker.php');
-	$fm = new FileMaker('login', '172.16.9.62', 'admin', 'Mohit@249d');
+    include("./config/config.php");
 	
 	// find the associate layout
 	$request = $fm->newFindCommand('registration');
 	
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>

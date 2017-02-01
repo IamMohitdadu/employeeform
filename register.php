@@ -13,24 +13,11 @@ if(isset($_POST['btn-signup'])) {
     
 	$error = false;
     // to connect the database
-    require_once ('filemakerapi/FileMaker.php');
-	$fm = new FileMaker('login', '172.16.9.62', 'admin', 'Mohit@249d');
-	
-	// find the associate layout
-	$request = $fm->newFindCommand('registration');
-    
-    // clean user input to prevent sql injection.
-    $name = trim($_POST['name']);
-    $name = strip_tags($name);
-    $name = htmlspecialchars($name);
-    
-    $email = trim($_POST['email']);
-    $email = strip_tags($email);
-    $email = htmlspecialchars($email);
-    
-    $pass = trim($_POST['password']);
-    $pass = strip_tags($pass);
-    $pass = htmlspecialchars($pass);
+    include("./config/config.php");
+
+	$name = $empobj->Sanitize($_POST['name']);
+	$email = $empobj->Sanitize($_POST['email']);
+	$pass = $empobj->Sanitize($_POST['password']);
     
     // name validation
     if (empty($name)) {
@@ -64,6 +51,8 @@ if(isset($_POST['btn-signup'])) {
     // execute if there is no error
     if(!$error){
 		
+		// find the associate layout
+		$request = $fm->newFindCommand('registration');
 		$record = $fm->createRecord('registration');
 		$record->setField('Name', $name);
 		$record->setField('Email', $email);
@@ -102,7 +91,9 @@ if(isset($_POST['btn-signup'])) {
 	  </div>
 	</nav>
 	<div class="marquee">
-	  <marquee height=40> <h4 style="color: red;">Welcome to Employee Management Portal </h4></marquee>
+	  <marquee height=40>
+		<h4 style="color: red;">Welcome to Employee Management Portal </h4>
+	  </marquee>
 	</div>
 	<nav class="navbar navbar-inverse">
 	  <div class="row">
@@ -110,20 +101,25 @@ if(isset($_POST['btn-signup'])) {
 		  <div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav nav-tabs nav-justified">							
 			  <li><a href="register.php" style="font-weight: 900; color: lightblue;">
-				<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Registration </a></li>
+				<span class="glyphicon glyphicon-user">
+				</span>&nbsp;&nbsp;Registration </a>
+			  </li>
 			  <li><a href="login.php"><span class="glyphicon glyphicon-log-in">
-				</span>&nbsp;&nbsp;Login</a></li>
+				</span>&nbsp;&nbsp;Login</a>
+			  </li>
 			</ul>
 		  </div>
 		</div>
 	  </div>
 	</nav>
-    <form action="" class="form-horizontal container" name="LoginForm" method="post" id="form">
+    <form action="" class="form-horizontal container" name="LoginForm"
+		  method="post" id="form">
 	  <div class="container-fluid form-group">
 		<div class="col-sm-10">
 		  <label class="control-label col-sm-4">Name:</label>
 		  <div class="col-sm-6">
-			<input type="text" id="name" name="name" class="form-control" placeholder="Your Name"/>
+			<input type="text" id="name" name="name" class="form-control"
+				   placeholder="Your Name"/>
 		  	  <span id="mailinfo" style="color: red;">
 				<?php
 				if(isset($nameError)){
@@ -134,7 +130,8 @@ if(isset($_POST['btn-signup'])) {
 		  </div>
 		  <label class="control-label col-sm-4">User name:</label>
 		  <div class="col-sm-6">
-			<input type="text" id="email" name="email" class="form-control" placeholder="Email address"/>
+			<input type="text" id="email" name="email" class="form-control" 
+				   placeholder="Email address"/>
 	  		  <span id="mailinfo" style="color: red">
 				<?php
 				  if(isset($emailError)){
@@ -145,7 +142,8 @@ if(isset($_POST['btn-signup'])) {
 		  </div>
 		  <label class="control-label col-sm-4">Password:</label>
 		  <div class="col-sm-6">
-			<input type="password" id="password" name="password" class="form-control" placeholder="should be atleast 6 characters"/>
+			<input type="password" id="password" name="password" class="form-control" 
+				   placeholder="should be atleast 6 characters"/>
 			  <span id="mailinfo" style="color: red">
 				<?php
 				  if(isset($passError)){
@@ -159,7 +157,8 @@ if(isset($_POST['btn-signup'])) {
 	  <div class="form-style">
 		<div class="col-lg-6"></div>
 		<div class="col-lg-2">
-		  <input type='submit' class="btn btn-lg btn-primary btn-block" name='btn-signup' value='Sign Up'>
+		  <input type='submit' class="btn btn-lg btn-primary btn-block" 
+				 name='btn-signup' value='Sign Up'>
 		</div>
 	    <div class="col-lg-4"></div>
 	  </div>      

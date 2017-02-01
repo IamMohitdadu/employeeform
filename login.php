@@ -8,24 +8,14 @@
 **/
 
     // to connect the database
-    require_once ('filemakerapi/FileMaker.php');
-	$fm = new FileMaker('login', '172.16.9.62', 'admin', 'Mohit@249d');
-	
-	// find the associate layout
-	$request = $fm->newFindCommand('registration');
+    include("./config/config.php");
 	
     // execute if login button is pressed
     if( isset($_POST['btn-login'])) {
 		
 		$error = false;
-		
-		$email = trim($_POST['email']);
-		$email = strip_tags($email);
-		$email = htmlspecialchars($email);
-		
-		$pass = trim($_POST['password']);
-		$pass = strip_tags($pass);
-		$pass = htmlspecialchars($pass);
+		$email = $empobj->Sanitize($_POST['email']);
+		$pass = $empobj->Sanitize($_POST['password']);
 		
 		// validation for email.
 		if (empty($email)) {
@@ -45,7 +35,11 @@
 		// execute if there is no error
 		if (!$error) {
 			//$pass=hash('sha256', $pass);
+			
 			$email = '=="' . $email . '"';
+			
+			// find the associate layout
+			$request = $fm->newFindCommand('registration');
 			$request->addFindCriterion('Email', $email);
 			$result = $request->execute();
 			$records = $result->getRecords();

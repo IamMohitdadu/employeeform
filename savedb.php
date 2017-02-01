@@ -3,12 +3,13 @@
 
 /**
  * file-name: savedb.php
- * used-for: updatedb.php
+ * used-for: user.php
  * created-by: Mohit Dadu
- * description: it is the php file to connect with database and update data into MySql table.
+ * description: It is the php file to save the data entered by the user at the
+		registration time into the FileMaker database.
  * date:19/01/2017
 */
-
+	// 
 	if(isset($_POST['save'])) {
 
 		// starting the session 
@@ -17,6 +18,7 @@
 		// checking the session is present or not
 		if (!isset($_SESSION['email'])) {
 			header("Location: login.php");
+			exit;
 		}
 		// assign session to the session valriable
 		$email = $_SESSION['email'];
@@ -25,38 +27,31 @@
 		$error = false;
 		
 		// to connect the database
-		require_once ('filemakerapi/FileMaker.php');
-		$fm = new FileMaker('login', '172.16.9.62', 'admin', 'Mohit@249d');
+		include("./config/config.php");
 		
-		// clean user input to prevent sql injection.
-		$name = trim($_POST['name']);
-		$name = strip_tags($name);
-		$name = htmlspecialchars($name);
+		$name = $empobj->Sanitize($_POST['name']);
+		$pass = $empobj->Sanitize($_POST['password']);
 		
-		$pass = trim($_POST['pass']);
-		$pass = strip_tags($pass);
-		$pass = htmlspecialchars($pass);
-
 		// name validation
 		if (empty($name)) {
-					$error = true;
-					$nameError = "Please enter your full name.";
+			$error = true;
+			$nameError = "Please enter your full name.";
 		  } else if (strlen($name) < 3) {
-					$error = true;
-					$nameError = "Name must have atleat 3 characters.";
+			$error = true;
+			$nameError = "Name must have atleat 3 characters.";
 		} else {
-					$nameError = "";
+			$nameError = "";
 		}
 		
 		// password validation
 		if (empty($pass)) {
-					$error = true;
-					$passError = "Please enter password.";
+			$error = true;
+			$passError = "Please enter password.";
 		} else if (strlen($pass) < 6) {
-					$error = true;
-					$passError = "Password must have atleast 6 characters.";
+			$error = true;
+			$passError = "Password must have atleast 6 characters.";
 		} else {
-					$passError = "";
+			$passError = "";
 		}
 		
 		// execute if there is no error
@@ -81,14 +76,11 @@
 					$record->commit();
 				}	
 				header("Location: user.php");
-			}
-			
-				
+			}		
 		} else {
 			$errMSG = "Please Enter the correct information. ";
 			echo "$errMSG";
 		}
-			
 	} 
 
 ?>

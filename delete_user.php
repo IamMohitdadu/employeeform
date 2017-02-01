@@ -7,14 +7,15 @@
  * description: it is the user to delete the particular user from database.
  * date:24/01/2017
  * */
-
-	require_once ('filemakerapi/FileMaker.php');
-	$fm = new FileMaker('login', '172.16.9.62', 'admin', 'Mohit@249d');
 	
 
 	if (isset($_GET['id'])) {
 		
 		$id = $_GET['id'];
+		
+		// to connect the database
+		include("./config/config.php");
+	
 		// find the associate layout
 		$request = $fm->newFindCommand('registration');
 		$request->addFindCriterion('rec_id', $id);

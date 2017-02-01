@@ -15,6 +15,7 @@
 	// checking the session is present or not
 	if (!isset($_SESSION['email'])) {
 		header("Location: login.php");
+		exit;
 	}
 	// assign session to the session valriable
 	$nm = $_SESSION['name'];
@@ -24,28 +25,15 @@ if(isset($_POST['btn-signup'])) {
     
 	$error = false;
     // to connect the database
-    require_once ('filemakerapi/FileMaker.php');
-	$fm = new FileMaker('login', '172.16.9.62', 'admin', 'Mohit@249d');
+    include("./config/config.php");
 	
 	// find the associate layout
 	$request = $fm->newFindCommand('registration');
     
-    // clean user input to prevent sql injection.
-    $name = trim($_POST['name']);
-    $name = strip_tags($name);
-    $name = htmlspecialchars($name);
-    
-    $email = trim($_POST['email']);
-    $email = strip_tags($email);
-    $email = htmlspecialchars($email);
-    
-    $pass = trim($_POST['password']);
-    $pass = strip_tags($pass);
-    $pass = htmlspecialchars($pass);
-
-    $user = trim($_POST['userType']);
-    $user = strip_tags($user);
-    $user = htmlspecialchars($user);
+	$name = $empobj->Sanitize($_POST['name']);
+	$pass = $empobj->Sanitize($_POST['password']);
+	$email = $empobj->Sanitize($_POST['email']);
+	$user = $empobj->Sanitize($_POST['userType']);
     
     // name validation
     if (empty($name)) {
@@ -97,7 +85,6 @@ if(isset($_POST['btn-signup'])) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>
